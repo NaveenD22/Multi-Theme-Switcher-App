@@ -9,9 +9,10 @@ export default function Contact() {
   const contentRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
-    if (contentRef.current) {
+    const element = contentRef.current; // Copy ref to a variable
+    if (element) {
       gsap.fromTo(
-        contentRef.current,
+        element,
         { opacity: 0, y: 20, willChange: 'opacity, transform' },
         {
           opacity: 1,
@@ -19,12 +20,12 @@ export default function Contact() {
           duration: 0.5,
           ease: 'power2.out',
           onComplete: () => {
-            if (contentRef.current) contentRef.current.style.willChange = 'auto';
+            if (element) element.style.willChange = 'auto';
           },
         }
       );
       return () => {
-        gsap.killTweensOf(contentRef.current); // Cleanup GSAP animations
+        gsap.killTweensOf(element); // Use copied variable for cleanup
       };
     }
   }, [theme]);
@@ -34,7 +35,7 @@ export default function Contact() {
       <div ref={contentRef}>
         <h1 className="text-3xl font-bold md:text-4xl">Contact Us</h1>
         <p className="mb-6 max-w-2xl">
-          Reach out to us for any inquiries or support. We're here to help!
+          Reach out to us for any inquiries or support. We&apos;re here to help!
         </p>
         <button className="btn-primary">Get in Touch</button>
       </div>
