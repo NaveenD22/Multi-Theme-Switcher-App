@@ -1,0 +1,65 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Theme-specific CSS variables */
+[data-theme='theme1'] {
+  --background: #f9fafb;
+  --foreground: #1f2937;
+  --header: #ffffff;
+  --header-foreground: #1f2937;
+  --primary: #3b82f6;
+  --primary-foreground: #ffffff;
+  --card: #ffffff;
+  --font-family: 'Open Sans', sans-serif;
+  --font-size-base: 1rem;
+  --spacing: 1rem;
+  --border-radius: 0.25rem;
+}
+
+[data-theme='theme2'] {
+  --background: #1f2937;
+  --foreground: #f9fafb;
+  --header: #111827;
+  --header-foreground: #f9fafb;
+  --primary: #1d4ed8;
+  --primary-foreground: #ffffff;
+  --card: #374151;
+  --font-family: 'Lora', serif;
+  --font-size-base: 1.1rem;
+  --spacing: 1.5rem;
+  --border-radius: 0.25rem;
+}
+
+[data-theme='theme3'] {
+  --background: #fef3c7;
+  --foreground: #7c2d12;
+  --header: #7c2d12;
+  --header-foreground: #fef3c7;
+  --primary: #ea580c;
+  --primary-foreground: #ffffff;
+  --card: #ffedd5;
+  --font-family: 'Pacifico', cursive;
+  --font-size-base: 1.2rem;
+  --spacing: 2rem;
+  --border-radius: 0.25rem;
+}
+
+/* Apply dynamic theme variables */
+body {
+  background-color: var(--background);
+  color: var(--foreground);
+  font-family: var(--font-family);
+  font-size: var(--font-size-base);
+}
+
+/* Accessibility enhancements */
+:focus {
+  outline: 2px solid var(--primary);
+  outline-offset: 2px;
+}
+
+/* Prevent text selection for better UX */
+.btn-primary, .product-card {
+  user-select: none;
+}
