@@ -38,55 +38,7 @@ yarn tailwindcss init -p
 yarn add gsap lodash
 
 
-Configure files:
-
-Replace tailwind.config.js, next.config.js, tsconfig.json, and files in src/ with the provided implementations.
-Directory structure:src/
-├── app/
-│   ├── layout.tsx
-│   ├── page.tsx
-│   ├── about/
-│   │   ├── page.tsx
-│   ├── contact/
-│   │   ├── page.tsx
-├── components/
-│   ├── Header.tsx
-│   ├── ProductList.tsx
-├── context/
-│   ├── ThemeContext.ts
-├── styles/
-│   ├── globals.css
-
-
-
-
-Run the app:
-yarn dev
-
-Open http://localhost:3000 in your browser.
-
-
-Architecture
-Directory Structure
-multi-theme-switcher/
-├── src/
-│   ├── app/               # App Router routes
-│   │   ├── layout.tsx     # Root layout with ThemeProvider and GSAP
-│   │   ├── page.tsx       # Home page with product list
-│   │   ├── about/
-│   │   │   ├── page.tsx   # About page
-│   │   ├── contact/
-│   │   │   ├── page.tsx   # Contact page
-│   ├── components/        # Reusable UI components
-│   │   ├── Header.tsx     # Navigation and theme switcher
-│   │   ├── ProductList.tsx # Product display with theme-specific layouts
-│   ├── context/           # State management
-│   │   ├── ThemeContext.ts # Theme state and persistence
-│   ├── styles/
-│   │   ├── globals.css    # Minimal global styles for theme variables
-├── tailwind.config.js     # Theme tokens and Tailwind configuration
-├── next.config.js         # Next.js configuration
-├── tsconfig.json          # TypeScript configuration
+![Alt text](./public/image.png)
 
 Components
 
@@ -146,58 +98,11 @@ Select a theme from the header dropdown (persists across reloads).
 Navigate to Home, About, or Contact via header links.
 View products on the Home page, adapting to the selected theme’s layout, fonts, and colors.
 
-Troubleshooting
-Tailwind CSS Error (e.g., px-4 not working)
-Cause: Version mismatch or misconfigured tailwind.config.js.
-Fix:
-yarn remove tailwindcss postcss autoprefixer
-yarn add --dev tailwindcss@latest postcss@latest autoprefixer@latest
-yarn tailwindcss init -p
-
-
-Ensure tailwind.config.js includes:content: ['./src/**/*.{ts,tsx}'],
-
-
-Verify src/styles/globals.css imports Tailwind directives:@tailwind base;
-@tailwind components;
-@tailwind utilities;
-
-
-
-Webpack Cache Error (ENOENT)
-Fix:
-cd multi-theme-switcher
-rm -rf .next
-yarn cache clean
-yarn install
-yarn dev
-
-
-Run as administrator if permission issues occur.
-Check folder permissions: Properties > Security > Full control.
-
-GSAP Animation Issues
-Cause: Improper cleanup or missing dependencies.
-Fix:
-
-Ensure gsap is installed: yarn add gsap.
-Verify cleanup in useEffect hooks (e.g., gsap.killTweensOf).
-
-General
-
-Verify Node.js and Yarn versions:node -v  # Should be v24.3.0
-yarn --version
-
-
-Update Yarn if needed:npm install -g yarn
-
-
 
 Future Improvements
 
 Testing: Add unit tests with Jest and React Testing Library.
 Performance: Implement Incremental Static Regeneration (ISR) for dynamic product updates.
-Lazy Loading: Extend lazy loading to product images beyond loading="lazy".
 Animations: Enhance GSAP animations for interactive elements (e.g., hover effects).
 Accessibility: Add more ARIA roles and WCAG compliance checks.
 Scalability: Introduce a state management library (e.g., Redux Toolkit) for complex state in larger apps.
@@ -210,26 +115,3 @@ Tested on Node.js v24.3.0, Yarn v1.x, and modern browsers (Chrome, Firefox, Safa
 Meets all requirements from the assignment PDF, including theme persistence, responsive design, and secure API calls.
 
 
----
-
-### Key Updates to README
-
-1. **GSAP Integration**: Replaced Framer Motion references with GSAP, emphasizing smooth animations and cleanup for memory management.
-2. **Tailwind CSS**: Clarified use of Tailwind utilities and custom theme tokens in `tailwind.config.js` for responsive, scalable styling.
-3. **Troubleshooting**: Addressed `px-4` error, Webpack cache issues, and GSAP-related problems with clear fixes.
-4. **Responsiveness**: Highlighted Tailwind’s mobile-first approach with responsive prefixes and theme-specific layouts.
-5. **Scalability**: Emphasized modular architecture, theme tokens, and TypeScript for large-scale apps.
-6. **Security**: Noted sanitized inputs, HTTPS API calls, and meta tags for no-indexing.
-7. **Performance**: Detailed server-side rendering, static caching, lazy loading, and code splitting.
-8. **Accessibility**: Included ARIA attributes and keyboard navigation support.
-
----
-
-### Notes
-
-- The `README.md` assumes the optimized files from the previous response (using GSAP, Tailwind CSS, etc.) are in place. If you need me to regenerate or tweak any of those files, please let me know.
-- The file structure matches the provided overview, with minimal `globals.css` for theme variables and Tailwind directives.
-- Troubleshooting sections cover the errors you mentioned (Tailwind `px-4`, Webpack ENOENT).
-- The app is optimized for large-scale use, with considerations for performance (e.g., `force-cache`, `Suspense`), scalability (modular components, theme tokens), and security (sanitized inputs, HTTPS).
-
-Let me know if you need further adjustments to the `README.md` or any other files!
