@@ -24,7 +24,7 @@ export default function About() {
         }
       );
       return () => {
-        gsap.killTweensOf(contentRef.current); // Cleanup GSAP animations
+        gsap.killTweensOf(contentRef.current); 
       };
     }
   }, [theme]);

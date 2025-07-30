@@ -5,7 +5,7 @@
 /* Theme-specific CSS variables */
 [data-theme='theme1'] {
   --background: #f9fafb;
-  --foreground: #1f2937;
+  --foreground: #111827;
   --header: #ffffff;
   --header-foreground: #1f2937;
   --primary: #3b82f6;

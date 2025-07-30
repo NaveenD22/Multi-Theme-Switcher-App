@@ -1,7 +1,7 @@
 'use client';
 
 import { useContext, useEffect, useRef } from 'react';
-import { ThemeContext, ThemeProvider,  } from '@/context/ThemeContext';
+import { ThemeContext, ThemeProvider } from '@/context/ThemeContext';
 import '@/styles/globals.css';
 import Header from '@/components/Header';
 import { gsap } from 'gsap';
@@ -28,10 +28,16 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
       };
     }
     return undefined;
-  }, [theme]); // Trigger on theme change or navigation
-
+  }, [theme]);
+const handleLinkLoad = (event: React.SyntheticEvent<HTMLLinkElement>) => {
+    const linkElement = event.currentTarget as HTMLLinkElement;
+    linkElement.media = 'all';
+  };
   return (
     <html lang="en" data-theme={theme}>
+      <head>
+        <link rel="stylesheet" href="/styles/globals.css" media="print" onLoad={handleLinkLoad} /> 
+      </head>
       <body className="min-h-screen flex flex-col">
         <ThemeProvider>
           <Header />

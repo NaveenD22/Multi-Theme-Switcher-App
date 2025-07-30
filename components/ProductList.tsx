@@ -3,6 +3,7 @@
 import { useContext, useEffect, useRef } from 'react';
 import { ThemeContext } from '@/context/ThemeContext';
 import { gsap } from 'gsap';
+import Image from 'next/image'; // Import Next.js Image
 
 export interface Product {
   id: number;
@@ -22,7 +23,7 @@ const ProductList: React.FC<ProductListProps> = ({ products }) => {
 
   useEffect(() => {
     if (productListRef.current) {
-      const children = Array.from(productListRef.current.children); // Convert HTMLCollection to array
+      const children = Array.from(productListRef.current.children);
       if (children.length > 0) {
         gsap.fromTo(
           children,
@@ -39,7 +40,7 @@ const ProductList: React.FC<ProductListProps> = ({ products }) => {
           }
         );
         return () => {
-          gsap.killTweensOf(children); // Cleanup GSAP animations
+          gsap.killTweensOf(children);
         };
       }
     }
@@ -48,7 +49,11 @@ const ProductList: React.FC<ProductListProps> = ({ products }) => {
   return (
     <div
       ref={productListRef}
-      className={`grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-6 ${theme === 'theme2' ? 'flex flex-col' : ''}`}
+      className={`${
+        theme === 'theme2'
+          ? 'flex flex-col gap-4 sm:gap-6'
+          : 'grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6 lg:gap-8'
+      } mt-[var(--spacing)]`}
       role="region"
       aria-label="Product Listings"
     >
@@ -56,20 +61,23 @@ const ProductList: React.FC<ProductListProps> = ({ products }) => {
         products.map((product) => (
           <div
             key={product.id}
-            className="border rounded-lg bg-card p-4 md:p-6"
+            className="border rounded-[var(--border-radius)] bg-card p-[var(--spacing)] sm:p-[calc(var(--spacing)*1.25)] product-card"
           >
-            <img
+            <Image
               src={product.image}
               alt={product.title}
-              className="w-full h-48 object-contain mb-4"
-              loading="lazy"
+              width={300} 
+              height={400} 
+              className="w-full h-32 sm:h-40 lg:h-48 object-contain mb-[var(--spacing)]"
+              priority={true} // For LCP optimization
+              loading="eager" // Override lazy loading for LCP
             />
-            <h3 className="text-lg font-semibold">{product.title}</h3>
-            <p>${product.price}</p>
+            <h3 className="text-base sm:text-lg font-semibold">{product.title}</h3>
+            <p className="text-sm sm:text-base">${product.price}</p>
           </div>
         ))
       ) : (
-        <p className="text-center col-span-full" role="alert">
+        <p className="text-center col-span-full text-sm sm:text-base" role="alert">
           No products available at the moment.
         </p>
       )}

@@ -38,7 +38,7 @@ yarn tailwindcss init -p
 yarn add gsap lodash
 
 
-![Alt text](./public/image.png)
+![Alt text](./public/image.webp)
 
 Components
 

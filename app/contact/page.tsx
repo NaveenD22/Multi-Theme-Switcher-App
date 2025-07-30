@@ -9,7 +9,7 @@ export default function Contact() {
   const contentRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
-    const element = contentRef.current; // Copy ref to a variable
+    const element = contentRef.current; 
     if (element) {
       gsap.fromTo(
         element,
@@ -25,7 +25,7 @@ export default function Contact() {
         }
       );
       return () => {
-        gsap.killTweensOf(element); // Use copied variable for cleanup
+        gsap.killTweensOf(element); 
       };
     }
   }, [theme]);
